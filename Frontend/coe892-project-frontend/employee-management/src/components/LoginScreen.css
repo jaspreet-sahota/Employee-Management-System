@@ -1,0 +1,22 @@
+.login-screen {
+    border: 2px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    background: rgb(8,1,125);
+    background: linear-gradient(180deg, rgba(8,1,125,1) 0%, rgba(176,182,189,1) 100%);
+    
+}
+.form-signin {
+    align-content: center;
+    border: 1px solid;
+    display: block;
+    width: 300px;
+    padding: 15px;
+    background-color: #ffffff;
+}
+.form-check {
+    text-align: center;
+}
