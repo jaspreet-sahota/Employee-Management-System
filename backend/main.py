@@ -1,11 +1,12 @@
 from fastapi import FastAPI
+from employee_management import router as employee_router
+from shift_management import router as shift_router
+from schedule_management import router as schedule_router
+from payroll_management import router as payroll_router
 
 app = FastAPI()
 
-@app.get("/")
-async def read_root():
-    return {"message": "Hello, World"}
-
-@app.get("/items/{item_id}")
-async def read_item(item_id: int, q: str = None):
-    return {"item_id": item_id, "q": q}
+app.include_router(employee_router)
+app.include_router(shift_router)
+app.include_router(schedule_router)
+app.include_router(payroll_router)
