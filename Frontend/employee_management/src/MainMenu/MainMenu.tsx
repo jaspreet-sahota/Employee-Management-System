@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useState } from "react";
+import { useNavigate } from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Form, Button } from "react-bootstrap";
 import "./MainMenu.css";
@@ -6,6 +7,7 @@ import "./MainMenu.css";
 const MainMenu: FunctionComponent = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
@@ -17,10 +19,11 @@ const MainMenu: FunctionComponent = () => {
 
   const handleLogin = () => {
     // Add login logic here using username and password
+    alert('Username: ' + username + '\nPassword: ' + password)
   };
 
   const handleRegister = () => {
-    // Add register logic here using username and password
+    navigate("/register-user")
   };
 
   return (
