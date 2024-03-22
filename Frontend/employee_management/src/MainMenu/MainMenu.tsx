@@ -58,7 +58,6 @@ const MainMenu: FunctionComponent = () => {
           </div>
         </div>
         <div className="login-register">
-          <div>
             <Button
               className="login-button"
               variant="primary"
@@ -75,7 +74,6 @@ const MainMenu: FunctionComponent = () => {
             >
               REGISTER
             </Button>
-          </div>
         </div>
 
         <div className="design-members-master">
