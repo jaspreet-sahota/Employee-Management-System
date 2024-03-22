@@ -1,0 +1,100 @@
+.coe892-project,
+.employee-management-system {
+  margin: 0;
+}
+.coe892-project-employee-container {
+  margin: 0;
+  width: 568px;
+  position: relative;
+  font-size: inherit;
+  font-weight: 700;
+  font-family: inherit;
+  display: inline-block;
+}
+.coe892-project-employee-manage-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0 0 17px;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+/* --------------------------------------------------- */
+.dashboard-login-inner {
+  width: 568px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+/* --> */
+        .password,
+        .username {
+        width: 300px;
+        height: 50px;
+        align-self: stretch;
+        }
+/* --------------------------------------------------- */
+.login-register{
+    width: 568px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+/* --> */
+        .login-button,
+        .register-button {
+        width: 300px;
+        height: 50px;
+        align-self: stretch;
+        }
+/* --------------------------------------------------- */
+.design-members-master{
+    width: 586px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+/* --> */
+        .design-members{
+            width: 300px;
+            font-size: 10px;
+        }
+.dashboard-login,
+.desktop,
+.login-register {
+  max-width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+.dashboard-login {
+  flex: 1;
+  background: linear-gradient(180deg, #d2d2d2, #00228b);
+  overflow: hidden;
+  flex-direction: column;
+  align-items: center;
+  padding: 161px var(--padding-xl) 61px;
+  box-sizing: border-box;
+  gap: 43px;
+  text-align: center;
+  font-size: 40px;
+  color: var(--color-white);
+  font-family: var(--font-roboto);
+}
+
+.desktop {
+    width: 100%; /* Set width to 100% of the parent container */
+    height: 100vh;
+    overflow: hidden;
+    flex-direction: row; /* Align items horizontally */
+    align-items: flex-start; /* Align items to the start of the cross axis */
+    letter-spacing: normal;
+    display: flex; /* Use Flexbox layout */
+  }
+
