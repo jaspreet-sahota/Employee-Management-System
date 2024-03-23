@@ -1,6 +1,9 @@
 .coe892-project,
 .employee-management-system {
   margin: 0;
+  color: black;
+  padding-top: 15px;
+  font-size: 35px;
 }
 .coe892-project-employee-container {
   margin: 0;
@@ -20,55 +23,64 @@
   box-sizing: border-box;
   max-width: 100%;
 }
-/* --------------------------------------------------- */
-.dashboard-login-inner {
-  width: 568px;
-  height: 100px;
+.login-box {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-/* --> */
-        .password,
-        .username {
-        width: 300px;
-        height: 50px;
-        align-self: stretch;
-        }
-/* --------------------------------------------------- */
-.login-register{
-    width: 300px;
-    height: 100px;
-    display: flex;
-    gap: 10px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-/* --> */
-        .login-button,
-        .register-button {
-        width: 300px;
-        height: 50px;
-        align-self: stretch;
-        }
-/* --------------------------------------------------- */
-.design-members-master{
-    width: 586px;
-    height: 100px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-/* --> */
-        .design-members{
-            width: 300px;
-            font-size: 10px;
-        }
+  gap: 20px;
+  border-style: solid; /* Set the border style to solid */
+  border-color: black; /* Set the border color */
+  border-width: 1px; /* Set the border width */
+  background-color: beige;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
 
-/* --------------------------------------------------- */
+}
+/* --> */
+      /* --------------------------------------------------- */
+      .dashboard-login-inner {
+        width: 300px;
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      /* --> */
+              .password,
+              .username {
+              width: 300px;
+              height: 50px;
+              align-self: stretch;
+              }
+      /* --------------------------------------------------- */
+      .login-register{
+          width: 300px;
+          height: 100px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+      }
+      /* --> */
+              .login-button,
+              .register-button {
+                height: 50px;
+              }
+      /* --------------------------------------------------- */
+      .design-members-master{
+          width: 586px;
+          height: 100px;
+          justify-content: center;
+          align-items: center;
+      }
+      /* --> */
+              .design-members{
+                  width: 300px;
+                  font-size: 10px;
+                  color: black;
+              }
+
+      /* --------------------------------------------------- */
 .dashboard-login,
 .desktop,
 .login-register {
