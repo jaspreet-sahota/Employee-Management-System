@@ -18,8 +18,8 @@ const MainMenu: FunctionComponent = () => {
   };
 
   const handleLogin = () => {
-    // Add login logic here using username and password
-    alert('Username: ' + username + '\nPassword: ' + password)
+    // Add authentication code here to look up the user in the database
+    navigate('/admin-dashboard', {state: {username, password}})
   };
 
   const handleRegister = () => {

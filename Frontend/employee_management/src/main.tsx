@@ -10,8 +10,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Router>
       <Routes>
-        <Route path='/' element={<AdminScreen />} />
-        <Route path='/login' element={<MainMenu />} /> 
+        <Route path='/admin-dashboard' element={<AdminScreen />} />
+        <Route path='/' element={<MainMenu />} /> 
         <Route path='/register-user' element={<Register />} />
       </Routes>
     </Router>
