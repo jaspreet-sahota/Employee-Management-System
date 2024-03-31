@@ -16,7 +16,6 @@ const Register: FunctionComponent = () => {
     <main className="main">
       <div className="coe892-project-employee-manage-wrapper">
           <h1 className="coe892-project-employee-container">
-            <p className="coe892-project">COE892 Project</p>
             <p className="employee-management-system">
               Employee Management System
             </p>
