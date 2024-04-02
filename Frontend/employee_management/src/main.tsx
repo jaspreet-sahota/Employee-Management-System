@@ -8,6 +8,7 @@ import AdminScreen from './AdminScreen/AdminScreen'
 import EmployeeScreen from './EmployeeScreen/EmployeeScreen'
 import ChooseRole from './ChooseRole/ChooseRole'
 import AddShifts from './AddShifts/AddShifts'
+import DelShifts from './DelShifts/DelShifts'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -19,6 +20,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Route path='/register-user' element={<Register />} />
         <Route path='/choose-role' element={<ChooseRole />} />
         <Route path='/add-shift' element={<AddShifts />} />
+        <Route path='/del-shift' element={<DelShifts />} />
       </Routes>
     </Router>
   </React.StrictMode>,

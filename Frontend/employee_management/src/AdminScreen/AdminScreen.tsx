@@ -64,10 +64,10 @@ const AdminScreen: FunctionComponent = () => {
                     <td>Otto</td>
                     <td>mark.otto@gmail.com</td>
                     <td>
-                      <a href="/">Add Shifts</a>
+                      <a href="/add-shift">Add Shifts</a>
                     </td>
                     <td>
-                      <a href="/">Remove Shifts</a>
+                      <a href="/del-shift">Remove Shifts</a>
                     </td>
                   </tr>
                   <tr>
@@ -76,22 +76,10 @@ const AdminScreen: FunctionComponent = () => {
                     <td>Thornton</td>
                     <td>jacob.thornton@gmail.com</td>
                     <td>
-                      <a href="/">Add Shifts</a>
+                      <a href="/add-shift">Add Shifts</a>
                     </td>
                     <td>
-                      <a href="/">Remove Shifts</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>33334444</td>
-                    <td>Colin</td>
-                    <td>Page</td>
-                    <td>colin.page@gmail.com</td>
-                    <td>
-                      <a href="/">Add Shifts</a>
-                    </td>
-                    <td>
-                      <a href="/">Remove Shifts</a>
+                      <a href="/del-shift">Remove Shifts</a>
                     </td>
                   </tr>
                   <tr>
@@ -100,22 +88,10 @@ const AdminScreen: FunctionComponent = () => {
                     <td>Page</td>
                     <td>colin.page@gmail.com</td>
                     <td>
-                      <a href="/">Add Shifts</a>
+                      <a href="/add-shift">Add Shifts</a>
                     </td>
                     <td>
-                      <a href="/">Remove Shifts</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>33334444</td>
-                    <td>Colin</td>
-                    <td>Page</td>
-                    <td>colin.page@gmail.com</td>
-                    <td>
-                      <a href="/">Add Shifts</a>
-                    </td>
-                    <td>
-                      <a href="/">Remove Shifts</a>
+                      <a href="/del-shift">Remove Shifts</a>
                     </td>
                   </tr>
                   <tr>
@@ -124,10 +100,34 @@ const AdminScreen: FunctionComponent = () => {
                     <td>Page</td>
                     <td>colin.page@gmail.com</td>
                     <td>
-                      <a href="/">Add Shifts</a>
+                      <a href="/add-shift">Add Shifts</a>
                     </td>
                     <td>
-                      <a href="/">Remove Shifts</a>
+                      <a href="/del-shift">Remove Shifts</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>33334444</td>
+                    <td>Colin</td>
+                    <td>Page</td>
+                    <td>colin.page@gmail.com</td>
+                    <td>
+                      <a href="/add-shift">Add Shifts</a>
+                    </td>
+                    <td>
+                      <a href="/del-shift">Remove Shifts</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>33334444</td>
+                    <td>Colin</td>
+                    <td>Page</td>
+                    <td>colin.page@gmail.com</td>
+                    <td>
+                      <a href="/add-shift">Add Shifts</a>
+                    </td>
+                    <td>
+                      <a href="/del-shift">Remove Shifts</a>
                     </td>
                   </tr>
                   </tbody>

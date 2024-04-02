@@ -1,12 +1,13 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.js";
-import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import React, { FunctionComponent, useState } from "react";
 
 const AddShifts: FunctionComponent = () => {
     const [selectedDate, setSelectedDate] = useState('');
     const [selectedStartTime, setSelectedStartTime] = useState('');
     const [selectedEndTime, setSelectedEndTime] = useState('');
+    const navigate = useNavigate();
 
     const handleDateSelection = (date: React.SetStateAction<string>) => {
         setSelectedDate(date);
@@ -20,13 +21,31 @@ const AddShifts: FunctionComponent = () => {
         setSelectedEndTime(endTime);
     };
 
+    const handleEnterBtn = () => {
+        navigate("/")
+    }
+
 
 
     return (
-        <main className="main">
+        <main className="bg-body-secondary min-vh-100">
+
+            <div className="container text">
+                <header className="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom border-2 border-black">
+                <a className="d-flex align-items-center mb-3 mb-0 me-md-auto text-dark text-decoration-none" href="/">
+                    <span className="fs-4">Employee Management System</span>
+                </a>
+                <ul className="nav nav-pills">
+                    <li className="nav-nav-item">
+                    <a className="nav-link" href="/">Logout</a>
+                    </li>
+                </ul>
+                </header>
+            </div>
+
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col pb-5">
+                    <div className="col pb-5 text-center">
                         <h1>Employee Management System</h1>
                     </div>
                 </div>
@@ -112,6 +131,7 @@ const AddShifts: FunctionComponent = () => {
                                     </div>
                                 </div>
                             </div>
+                            <button onClick={handleEnterBtn} type="button" className="btn btn-secondary">Enter Shift</button>
                         </div>
                     </div>
 
