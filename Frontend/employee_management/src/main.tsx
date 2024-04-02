@@ -7,6 +7,7 @@ import Register from './RegisterPage/RegisterPage'
 import AdminScreen from './AdminScreen/AdminScreen'
 import EmployeeScreen from './EmployeeScreen/EmployeeScreen'
 import ChooseRole from './ChooseRole/ChooseRole'
+import AddShifts from './AddShifts/AddShifts'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -17,6 +18,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Route path='/employee-dashboard' element={<EmployeeScreen />} />
         <Route path='/register-user' element={<Register />} />
         <Route path='/choose-role' element={<ChooseRole />} />
+        <Route path='/add-shift' element={<AddShifts />} />
       </Routes>
     </Router>
   </React.StrictMode>,
