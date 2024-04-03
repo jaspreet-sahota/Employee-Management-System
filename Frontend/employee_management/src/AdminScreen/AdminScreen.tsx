@@ -16,7 +16,16 @@ interface Employee {
 const AdminScreen: FunctionComponent = () => {
   const location = useLocation();
   const { state } = location;
-  const [employees, setEmployees] = useState<Employee[]>([]);
+  const [employees, setEmployees] = useState<Employee[]>([
+    {
+      id: 1,
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'john.doe@example.com',
+      username: 'johndoe',
+      shifts: ['Morning Shift', 'Evening Shift'],
+    },
+  ]);
 
   useEffect(() => {
     // Fetch employee information
@@ -25,6 +34,11 @@ const AdminScreen: FunctionComponent = () => {
       .then(data => setEmployees(data))
       .catch(error => console.error('Error fetching employees:', error));
   }, []);
+
+  const handleEditShifts = (username: string) => {
+    // Implement your edit shifts logic here, such as redirecting to a new page with the username
+    console.log(`Editing shifts for ${username}`);
+  };
 
   return (
     <main>
@@ -52,6 +66,7 @@ const AdminScreen: FunctionComponent = () => {
                     <th scope="col">Last Name</th>
                     <th scope="col">Email Address</th>
                     <th scope="col">Add Shifts</th>
+                    <th scope="col">Edit Shifts</th>
                     <th scope="col">Remove Shifts</th>
                   </tr>
                 </thead>
@@ -64,6 +79,9 @@ const AdminScreen: FunctionComponent = () => {
                       <td>{employee.email}</td>
                       <td>
                         <a href={`/add-shift?username=${employee.username}`}>Add Shifts</a>
+                      </td>
+                      <td>
+                        <a href={`/edit-shift?username=${employee.username}`}>Edit Shifts</a>
                       </td>
                       <td>
                         <a href={`/del-shift?username=${employee.username}&shifts=${JSON.stringify(employee.shifts)}`}>Remove Shifts</a>
