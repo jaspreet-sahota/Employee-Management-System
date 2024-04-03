@@ -1,13 +1,23 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.js";
-import { useNavigate } from "react-router-dom";
-import React, { FunctionComponent, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import React, { FunctionComponent, useState, useEffect } from "react";
 
 const AddShifts: FunctionComponent = () => {
     const [selectedDate, setSelectedDate] = useState('');
     const [selectedStartTime, setSelectedStartTime] = useState('');
     const [selectedEndTime, setSelectedEndTime] = useState('');
+    const [employeeUsername, setEmployeeUsername] = useState('');
     const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        const queryParams = new URLSearchParams(location.search);
+        const username = queryParams.get('username');
+        if (username) {
+            setEmployeeUsername(username);
+        }
+    }, [location]);
 
     const handleDateSelection = (date: React.SetStateAction<string>) => {
         setSelectedDate(date);
@@ -23,26 +33,22 @@ const AddShifts: FunctionComponent = () => {
 
     const handleEnterBtn = () => {
         navigate("/")
-    }
-
-
+    };
 
     return (
         <main className="bg-body-secondary min-vh-100">
-
             <div className="container text">
                 <header className="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom border-2 border-black">
-                <a className="d-flex align-items-center mb-3 mb-0 me-md-auto text-dark text-decoration-none" href="/">
-                    <span className="fs-4">Employee Management System</span>
-                </a>
-                <ul className="nav nav-pills">
-                    <li className="nav-nav-item">
-                    <a className="nav-link" href="/">Logout</a>
-                    </li>
-                </ul>
+                    <a className="d-flex align-items-center mb-3 mb-0 me-md-auto text-dark text-decoration-none" href="/">
+                        <span className="fs-4">Employee Management System</span>
+                    </a>
+                    <ul className="nav nav-pills">
+                        <li className="nav-nav-item">
+                            <a className="nav-link" href="/">Logout</a>
+                        </li>
+                    </ul>
                 </header>
             </div>
-
             <div className="container-fluid">
                 <div className="row">
                     <div className="col pb-5 text-center">
@@ -51,15 +57,14 @@ const AddShifts: FunctionComponent = () => {
                 </div>
                 <div className="row">
                     <div className="col rounded mx-2"></div>
-
                     <div className="col-8 rounded mx-2 text-bg-light">
                         <h3 className="text-start py-2">Add Employee Shifts</h3>
                         <div className="mb-2 form-control text-start">
                             <label className="px-1 py-1" htmlFor="username">Employee Username</label>
-                            <input type="text" className="form-control mb-3" id="username" placeholder="Enter Employee Username" />
+                            <input type="text" className="form-control mb-3" id="username" placeholder="Enter Employee Username" value={employeeUsername} readOnly />
 
                             <div className="row mb-5 mt-2">
-                                <div className="col">
+                            <div className="col">
                                     <label className="form-label" htmlFor="dateField">Date</label>
                                     <input type="text" className="form-control mb-2" id="dateField" placeholder="Selected Date" value={selectedDate} readOnly />
 
@@ -134,7 +139,6 @@ const AddShifts: FunctionComponent = () => {
                             <button onClick={handleEnterBtn} type="button" className="btn btn-secondary">Enter Shift</button>
                         </div>
                     </div>
-
                     <div className="col rounded mx-2"></div>
                 </div>
             </div>

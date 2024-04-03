@@ -9,6 +9,7 @@ import EmployeeScreen from './EmployeeScreen/EmployeeScreen'
 import ChooseRole from './ChooseRole/ChooseRole'
 import AddShifts from './AddShifts/AddShifts'
 import DelShifts from './DelShifts/DelShifts'
+import EditShifts from './EditShifts/EditShifts'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -21,6 +22,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Route path='/choose-role' element={<ChooseRole />} />
         <Route path='/add-shift' element={<AddShifts />} />
         <Route path='/del-shift' element={<DelShifts />} />
+        <Route path='/edit-shift' element={<EditShifts />} />
       </Routes>
     </Router>
   </React.StrictMode>,
