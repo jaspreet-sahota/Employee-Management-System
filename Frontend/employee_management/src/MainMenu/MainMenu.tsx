@@ -7,6 +7,7 @@ import "./MainMenu.css";
 const MainMenu: FunctionComponent = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,6 +17,33 @@ const MainMenu: FunctionComponent = () => {
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
   };
+
+    // LOGIN PAGE API ENDPOINT
+  // -----------------------------------------------------------
+  // const handleLogin = async () => {
+  //   try {
+  //     const userData = { username, password };
+
+  //     const response = await fetch("your-api-login-endpoint", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(userData),
+  //     });
+
+  //     if (!response.ok) {
+  //       throw new Error("Failed to login");
+  //     }
+
+  //     const responseData = await response.json();
+  //     console.log("Login successful:", responseData);
+  //     navigate("/admin-dashboard");
+  //   } catch (error: any) {
+  //     setErrorMessage(error.message);
+  //   }
+  // };
+  // --------------------------------------------------------------
 
   const handleLogin = () => {
     // Add authentication code here to look up the user in the database
@@ -38,7 +66,7 @@ const MainMenu: FunctionComponent = () => {
             </h1>
           </div>
           <div className="dashboard-login-inner">
-            <div>
+            <div className=" pt-3 pb-1 mb-3 border-bottom border-top border-black border-2">
               <Form className="username">
                 <Form.Control
                   type="text"
