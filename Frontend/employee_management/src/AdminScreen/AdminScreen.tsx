@@ -42,7 +42,7 @@ const AdminScreen: FunctionComponent = () => {
 
   return (
     <main>
-      <div className="container">
+      <div className="container text-center">
         <header className="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
           <a className="d-flex align-items-center mb-3 mb-0 me-md-auto text-dark text-decoration-none" href="/">
             <span className="fs-4">Employee Management System</span>
@@ -53,8 +53,6 @@ const AdminScreen: FunctionComponent = () => {
             </li>
           </ul>
         </header>
-      </div>
-      <div className="container-fluid text-center">
         <div className="row">
           <div className="col border rounded mx-1">
             <div className="table-row row border rounded m-1 overflow-y-scroll">

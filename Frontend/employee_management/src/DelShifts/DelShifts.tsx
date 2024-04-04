@@ -41,18 +41,14 @@ const DelShifts: FunctionComponent = () => {
             </li>
           </ul>
         </header>
-      </div>
-
-      <div className="container-fluid">
         <div className="row">
           <div className="col pb-5 text-center">
             <h1>Employee Management System</h1>
           </div>
         </div>
         <div className="row">
-          <div className="col rounded"></div>
 
-          <div className="col-10 rounded mx-2 text-bg-light">
+          <div className="col rounded mx-2 text-bg-light">
             <h3 className="text-start py-2">Delete Employee Shifts</h3>
             <div className="row mb-5">
               <div className="col">
@@ -91,7 +87,6 @@ const DelShifts: FunctionComponent = () => {
               </div>
             </div>
           </div>
-          <div className="col rounded mx-2"></div>
         </div>
       </div>
     </main>
