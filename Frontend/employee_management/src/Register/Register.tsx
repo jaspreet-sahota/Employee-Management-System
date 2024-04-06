@@ -136,7 +136,7 @@ const Register: React.FC = () => {
         </form>
         <div className="already-registered">
           <p>Already Registered?</p>
-          <button className="continue-button" onClick={() => navigate('/Login')}>Login</button>
+          <button className="continue-button" onClick={() => navigate('/Login')}>login</button>
         </div>
       </div>
     </div>
