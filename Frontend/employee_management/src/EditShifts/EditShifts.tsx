@@ -3,6 +3,7 @@ import "bootstrap/dist/js/bootstrap.bundle.js";
 import { useNavigate } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import React, { FunctionComponent, useState } from "react";
+import Header from '../Common/Headers'
 
 const EditShifts: FunctionComponent = () => {
   const navigate = useNavigate();
@@ -30,35 +31,17 @@ const EditShifts: FunctionComponent = () => {
 
   return (
     <main className="bg-body-secondary min-vh-100">
-      <div className="container">
-        <header className="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom border-2 border-black">
-          <a
-            className="d-flex align-items-center mb-3 mb-0 me-md-auto text-dark text-decoration-none"
-            href="/"
-          >
-            <span className="fs-4">Employee Management System</span>
-          </a>
-          <ul className="nav nav-pills">
-            <li className="nav-nav-item">
-              <a className="nav-link" href="/">
-                Logout
-              </a>
-            </li>
-          </ul>
-        </header>
-      </div>
-
+      <Header/>
       <div className="container-fluid">
         <div className="row">
-          <div className="col pb-5 text-center">
-            <h1>Employee Management System</h1>
+          <div className="col pb-5 text-center" style={{ paddingTop: '40px' }}>
+            <h1>Edit Employee Shifts</h1>
           </div>
         </div>
         <div className="row">
           <div className="col rounded"></div>
 
           <div className="col-10 rounded mx-2 text-bg-light">
-            <h3 className="text-start py-2">Edit Employee Shifts</h3>
             <div className="row mb-5">
               <div className="col">
                 <Form.Group controlId="formBasicUsername">

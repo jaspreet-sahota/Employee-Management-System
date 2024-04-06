@@ -41,7 +41,7 @@ const Login: React.FC = () => {
   return (
     <div className="form-container">
       <form className="signin-form" onSubmit={handleLogin}>
-        <h2 className="form-title text-center">SIGN IN</h2>
+        <h2 className="form-title text-center">LOGIN</h2>
         {errorMessage && <div className="error-message">{errorMessage}</div>}
         <input
           className="form-input"

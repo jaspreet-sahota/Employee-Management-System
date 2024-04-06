@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.js";
 import { useNavigate, useLocation } from "react-router-dom";
 import React, { FunctionComponent, useState, useEffect } from "react";
+import Header from '../Common/Headers'
 
 const AddShifts: FunctionComponent = () => {
     const [selectedDate, setSelectedDate] = useState('');
@@ -37,37 +38,21 @@ const AddShifts: FunctionComponent = () => {
 
     return (
         <main className="bg-body-secondary min-vh-100">
-            <div className="container text">
-                <header className="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom border-2 border-black">
-                    <a className="d-flex align-items-center mb-3 mb-0 me-md-auto text-dark text-decoration-none" href="/">
-                        <span className="fs-4">Employee Management System</span>
-                    </a>
-                    <ul className="nav nav-pills">
-                        <li className="nav-nav-item">
-                            <a className="nav-link" href="/">Logout</a>
-                        </li>
-                    </ul>
-                </header>
-            </div>
+            <Header/>
             <div className="container-fluid">
-                <div className="row">
-                    <div className="col pb-5 text-center">
-                        <h1>Employee Management System</h1>
-                    </div>
+                <div className="col pb-5 text-center" style={{ paddingTop: '40px' }}>
+                    <h1>Add Employee Shifts</h1>
                 </div>
                 <div className="row">
                     <div className="col rounded mx-2"></div>
                     <div className="col-8 rounded mx-2 text-bg-light">
-                        <h3 className="text-start py-2">Add Employee Shifts</h3>
                         <div className="mb-2 form-control text-start">
                             <label className="px-1 py-1" htmlFor="username">Employee Username</label>
                             <input type="text" className="form-control mb-3" id="username" placeholder="Enter Employee Username" value={employeeUsername} readOnly />
-
                             <div className="row mb-5 mt-2">
                             <div className="col">
                                     <label className="form-label" htmlFor="dateField">Date</label>
                                     <input type="text" className="form-control mb-2" id="dateField" placeholder="Selected Date" value={selectedDate} readOnly />
-
                                     <div className="dropdown">
                                         <button className="btn btn-secondary dropdown-toggle" type="button" id="dateDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                             Select Date

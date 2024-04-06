@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.js";
 import "./AdminScreen.css";
+import Header from '../Common/Headers'
 
 interface Employee {
   id: number;
@@ -22,7 +23,15 @@ const AdminScreen: FunctionComponent = () => {
       firstName: 'John',
       lastName: 'Doe',
       email: 'john.doe@example.com',
-      username: 'johndoe',
+      username: 'john.doe',
+      shifts: ['Morning Shift', 'Evening Shift'],
+    },
+    {
+      id: 2,
+      firstName: 'Jane',
+      lastName: 'Doe',
+      email: 'jane.doe@example.com',
+      username: 'jane.doe',
       shifts: ['Morning Shift', 'Evening Shift'],
     },
   ]);
@@ -42,17 +51,8 @@ const AdminScreen: FunctionComponent = () => {
 
   return (
     <main>
+      <Header/>
       <div className="container text-center">
-        <header className="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-          <a className="d-flex align-items-center mb-3 mb-0 me-md-auto text-dark text-decoration-none" href="/">
-            <span className="fs-4">Employee Management System</span>
-          </a>
-          <ul className="nav nav-pills">
-            <li className="nav-nav-item">
-              <a className="nav-link" href="/">Logout</a>
-            </li>
-          </ul>
-        </header>
         <div className="row">
           <div className="col border rounded mx-1">
             <div className="table-row row border rounded m-1 overflow-y-scroll">
