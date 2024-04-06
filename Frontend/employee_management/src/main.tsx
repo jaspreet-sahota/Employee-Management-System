@@ -3,8 +3,10 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 //import './global.css'
 import Landing from './Landing/Landing'
-import Login from './Login/Login'
-import Register from './Register/Register'
+import LoginEmployee from './LoginEmployee/Login'
+import RegisterEmployee from './RegisterEmployee/Register'
+import LoginManager from './LoginManager/Login'
+import RegisterManager from './RegisterManager/Register'
 import AdminScreen from './AdminScreen/AdminScreen'
 import EmployeeScreen from './EmployeeScreen/EmployeeScreen'
 import ChooseRole from './ChooseRole/ChooseRole'
@@ -17,8 +19,10 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <Router>
       <Routes>
         <Route path='/' element={<Landing />} /> 
-        <Route path='/login' element={<Login />} /> 
-        <Route path='/register' element={<Register />} />
+        <Route path='/login-employee' element={<LoginEmployee />} /> 
+        <Route path='/register-employee' element={<RegisterEmployee />} />
+        <Route path='/login-manager' element={<LoginManager />} /> 
+        <Route path='/register-manager' element={<RegisterManager />} />
         <Route path='/admin-dashboard' element={<AdminScreen />} />
         <Route path='/employee-dashboard' element={<EmployeeScreen />} />
         <Route path='/choose-role' element={<ChooseRole />} />
