@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from "react";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Form, Button } from "react-bootstrap";
 import "./MainMenu.css";
@@ -18,12 +18,11 @@ const MainMenu: FunctionComponent = () => {
     setPassword(event.target.value);
   };
 
-    // LOGIN PAGE API ENDPOINT
+  // LOGIN PAGE API ENDPOINT
   // -----------------------------------------------------------
   // const handleLogin = async () => {
   //   try {
   //     const userData = { username, password };
-
   //     const response = await fetch("your-api-login-endpoint", {
   //       method: "POST",
   //       headers: {
@@ -31,11 +30,11 @@ const MainMenu: FunctionComponent = () => {
   //       },
   //       body: JSON.stringify(userData),
   //     });
-
+  //
   //     if (!response.ok) {
   //       throw new Error("Failed to login");
   //     }
-
+  //
   //     const responseData = await response.json();
   //     console.log("Login successful:", responseData);
   //     navigate("/admin-dashboard");
@@ -46,12 +45,11 @@ const MainMenu: FunctionComponent = () => {
   // --------------------------------------------------------------
 
   const handleLogin = () => {
-    // Add authentication code here to look up the user in the database
-    navigate('/admin-dashboard', {state: {username, password}})
+    navigate('/admin-dashboard', { state: { username, password } });
   };
 
   const handleRegister = () => {
-    navigate("/register-user")
+    navigate("/register-user");
   };
 
   return (
@@ -66,7 +64,7 @@ const MainMenu: FunctionComponent = () => {
             </h1>
           </div>
           <div className="dashboard-login-inner">
-            <div className=" pt-3 pb-1 mb-3 border-bottom border-top border-black border-2">
+            <div className="pt-3 pb-1 mb-3 border-bottom border-top border-black border-2">
               <Form className="username">
                 <Form.Control
                   type="text"
@@ -87,27 +85,25 @@ const MainMenu: FunctionComponent = () => {
           </div>
           <div className="login-register">
             <Button
-                className="login-button"
-                variant="primary"
-                size="lg"
-                onClick={handleLogin}
-              >
-                LOGIN
-              </Button>
-              <Button
-                className="register-button"
-                variant="primary"
-                size="lg"
-                onClick={handleRegister}
-              >
-                REGISTER
-              </Button>
+              className="login-button"
+              variant="primary"
+              size="lg"
+              onClick={handleLogin}
+            >
+              LOGIN
+            </Button>
+            <Button
+              className="register-button"
+              variant="primary"
+              size="lg"
+              onClick={handleRegister}
+            >
+              REGISTER
+            </Button>
           </div>
-
           <div className="design-members-master">
             <b className="design-members">
-              Designed By: Colin Page, Jaspreet Sahota, Chris Paul Kumaran, Ahmed
-              Ramadan
+              Designed By: Colin Page, Jaspreet Sahota, Chris Paul Kumaran, Ahmed Ramadan
             </b>
           </div>
         </div>

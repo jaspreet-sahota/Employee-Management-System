@@ -1,0 +1,96 @@
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url('../Assets/Images/landing.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.signin-form {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 40px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 550px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  margin: auto;
+  position: relative;
+}
+
+.form-input {
+  width: 100%;
+  padding: 16px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  font-size: 16px;
+}
+
+.form-button {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 25px;
+  background-color: #0A0747;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+
+.form-button:hover {
+  background-color: #645FBB;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.need-to-register {
+  text-align: center;
+  color: #333;
+  margin-top: 20px;
+}
+
+/* The continue button/link */
+.continue-button {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 25px;
+  background-color: #55585A;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+
+.continue-button:hover {
+  background-color: #645FBB;
+  border-color: #ad8a97; /* Kept because it's a hover style for continue-button */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .form-container {
+    padding: 10px;
+  }
+  
+  .signin-form {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .signin-form {
+    padding: 15px;
+  }
+}
