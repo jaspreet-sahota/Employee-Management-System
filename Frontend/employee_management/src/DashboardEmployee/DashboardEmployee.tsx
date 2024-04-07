@@ -48,7 +48,7 @@ const DashboardEmployee: FunctionComponent = () => {
   const fetchShifts = async (username: string) => {
     try {
       const queryParams = new URLSearchParams({ username }).toString();
-      const response = await fetch(`http://localhost:8000/schedule/employee/${username}`);
+      const response = await fetch(`http://localhost:8000/schedule/employee/${username}?${queryParams}`);
       console.log("username:", username);
       if (!response.ok) {
         const errorResponse = await response.text();
@@ -70,6 +70,7 @@ const DashboardEmployee: FunctionComponent = () => {
   };
 
   return (
+    
     <main>
       <Header />
       <div className="container text-center">
@@ -77,7 +78,6 @@ const DashboardEmployee: FunctionComponent = () => {
         <table className="table">
           <thead>
             <tr>
-              <th scope="col">Employee Username</th>
               <th scope="col">Shift Date</th>
               <th scope="col">Start Time</th>
               <th scope="col">End Time</th>
@@ -89,7 +89,6 @@ const DashboardEmployee: FunctionComponent = () => {
               console.log(`Shift at index ${index}:`, shift); // Debugging log
               return (
               <tr key={shift.id}>
-                <td>{shift.username}</td>
                 <td>{shift.shift_date}</td>
                 <td>{shift.start_time}</td>
                 <td>{shift.end_time}</td>

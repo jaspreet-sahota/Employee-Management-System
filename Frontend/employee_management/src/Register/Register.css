@@ -52,6 +52,10 @@
   margin-top: 20px;
 }
 
+.already-registered p {
+  margin-bottom: 0px;
+}
+
 .continue-button {
   width: 100%;
   padding: 16px;

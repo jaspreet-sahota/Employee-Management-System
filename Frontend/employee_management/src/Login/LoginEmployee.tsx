@@ -28,7 +28,7 @@ const LoginEmployee: React.FC = () => {
 
           const responseData = await response.json();
           console.log("Login successful:", responseData);
-          navigate("/dashboard-employee", { state: { storeId: responseData.store_id , employeeId: responseData.employee_id} });
+          navigate("/dashboard-employee", { state: { storeId: responseData.store_id , employeeId: responseData.employee_id , username: responseData.employee_username} });
       } catch (error: any) {
           setErrorMessage(error.message || 'Failed to login. Please try again later.');
       }
@@ -37,7 +37,7 @@ const LoginEmployee: React.FC = () => {
   return (
     <div className="form-container">
       <form className="signin-form" onSubmit={handleLogin}>
-        <h2 className="form-title text-center">LOGIN EMPLOYEE</h2>
+        <h2 className="form-title text-center">EMPLOYEE LOGIN</h2>
         {errorMessage && <div className="error-message">{errorMessage}</div>}
         <input
           className="form-input"
@@ -58,7 +58,11 @@ const LoginEmployee: React.FC = () => {
         <button className="form-button" type="submit">Login</button>
         <div className="need-to-register">
           <p>Need to Register?</p>
-          <button className="continue-button" onClick={() => navigate('/register-employee')} type="button">Register</button>
+          <button className="continue-button" onClick={() => navigate('/register-employee')} type="button">Employee Registration</button>
+        </div>
+        <div className="need-to-register">
+          <p>Not an Employee?</p>
+          <button className="continue-button" onClick={() => navigate('/login-manager')} type="button">Manager Login</button>
         </div>
       </form>
     </div>

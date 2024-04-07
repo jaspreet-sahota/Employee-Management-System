@@ -39,7 +39,7 @@ const LoginManager: React.FC = () => {
   return (
     <div className="form-container">
       <form className="signin-form" onSubmit={handleLogin}>
-        <h2 className="form-title text-center">LOGIN MANAGER</h2>
+        <h2 className="form-title text-center">MANAGER LOGIN</h2>
         {errorMessage && <div className="error-message">{errorMessage}</div>}
         <input
           className="form-input"
@@ -61,6 +61,10 @@ const LoginManager: React.FC = () => {
         <div className="need-to-register">
           <p>Need to Register?</p>
           <button className="continue-button" onClick={() => navigate('/register-manager')} type="button">Register</button>
+        </div>
+        <div className="need-to-register">
+          <p>Not a Manager?</p>
+          <button className="continue-button" onClick={() => navigate('/login-employee')} type="button">EMPLOYEE LOGIN</button>
         </div>
       </form>
     </div>

@@ -2,7 +2,7 @@ import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "./Register.css";
 
-const RegisterManager: React.FC = () => {
+const RegisterEmployee: React.FC = () => {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [storeID, setStoreID] = useState<string>('');
@@ -46,46 +46,42 @@ const RegisterManager: React.FC = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!validateForm()) return;
-
-    const managerData = {
-        store_id: parseInt(storeID), // Ensure storeID is an integer
-        first_name: firstName,
-        last_name: lastName,
-        username: username.toLowerCase(),
-        email: email.toLowerCase(),
-        password: password,
+  
+    const userData = {
+      store_id: parseInt(storeID), // Ensure storeID is an integer
+      first_name: firstName,
+      last_name: lastName,
+      username: username.toLowerCase(),
+      email: email.toLowerCase(),
+      password: password,
     };
-
+  
     try {
-        const response = await fetch("http://localhost:8000/register/manager", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(managerData),
-        });
-
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.detail || "Failed to register user");
-        }
-
-        // Assuming the response includes the store ID, or use the store ID from the form data
-        // If the backend does not return the store ID, replace responseData.store_id with managerData.store_id
-        const responseData = await response.json();
-        console.log("Registration successful:", responseData);
-        
-        // Navigate to DashboardManager with the store ID
-        navigate("/login-manager");
+      const response = await fetch("http://localhost:8000/register/employee", { // Adjusted URL to match your FastAPI endpoint
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.detail || "Failed to register user");
+      }
+  
+      const responseData = await response.json();
+      console.log("Registration successful:", responseData);
+      navigate("/login-employee");
     } catch (error: any) {
-        setErrorMessage(error.message || 'Failed to register. Please try again later.');
+      setErrorMessage(error.message || 'Failed to register. Please try again later.');
     }
-  };
+  };  
 
   return (
     <div className="form-container">
       <div className="register-form">
-        <h2 className="form-title text-center">REGISTER MANAGER</h2>
+        <h2 className="form-title text-center">REGISTER EMPLOYEE</h2>
         {errorMessage && <div className="error-message">{errorMessage}</div>}
         <form onSubmit={handleSubmit}>
           <input
@@ -141,11 +137,15 @@ const RegisterManager: React.FC = () => {
         </form>
         <div className="already-registered">
           <p>Already Registered?</p>
-          <button className="continue-button" onClick={() => navigate('/login-manager')}>login</button>
+          <button className="continue-button" onClick={() => navigate('/login-employee')}>employee login</button>
+        </div>
+        <div className="already-registered">
+          <p>Not an Employee?</p>
+          <button className="continue-button" onClick={() => navigate('/register-manager')}>Manager Registration</button>
         </div>
       </div>
     </div>
   );
 };
 
-export default RegisterManager;
+export default RegisterEmployee;

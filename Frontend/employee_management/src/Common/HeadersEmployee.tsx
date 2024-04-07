@@ -38,7 +38,7 @@ function Header() {
       <NavLink to="/dashboard-employee" className="logo" onClick={scrollTop}>Employee Management System</NavLink>
       <div className="header-right">
         <NavLink
-          to="/dashboard-manager"
+          to="/dashboard-employee"
           state={{ storeId: storeId, employeeId: employeeId, username: username }}
           className={({ isActive }) => (isActive ? 'active' : '')}
           end
