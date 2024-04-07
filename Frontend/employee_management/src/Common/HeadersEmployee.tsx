@@ -14,10 +14,10 @@ class Header extends Component {
   render() {
     return (
       <div className="header">
-        <a href="/admin-dashboard" className="logo">Employee Management System</a>
+        <a href="/dashboard-employee" className="logo">Employee Management System</a>
         <div className="header-right">
-          <NavLink className={({ isActive }) => isActive ? "active" : ""} to="/admin-dashboard" end>
-            Admin Dashboard
+          <NavLink className={({ isActive }) => isActive ? "active" : ""} to="/dashboard-employee" end>
+            Employee Dashboard
           </NavLink>
           <NavLink className={({ isActive }) => isActive ? "active" : ""} to="/account-settings">
             Account Settings

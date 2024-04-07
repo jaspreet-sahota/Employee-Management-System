@@ -39,12 +39,12 @@ class Employee(Base):
 class EmployeeShifts(Base):
     __tablename__ = 'employee_shifts'
     id = Column(Integer, primary_key=True, index=True)
-    shift_date = Column(DateTime)
-    start_time = Column(DateTime)
-    end_time = Column(DateTime)
+    shift_date = Column(String)
+    start_time = Column(String)
+    end_time = Column(String)
 
     # Foreign Keys
-    employee_id = Column(Integer, ForeignKey('employees.id'))
+    username = Column(String, ForeignKey('employees.username'))
     store_id = Column(Integer, ForeignKey('stores.id'))
 
     # Relationships

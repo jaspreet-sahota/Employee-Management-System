@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Depends, status
+from fastapi import FastAPI, HTTPException, Depends, Path, Query, status
 from typing import List
 from sqlalchemy.orm import Session
 from pydantic import BaseModel, EmailStr, validator
@@ -43,12 +43,32 @@ class UserLogin(BaseModel):
     username: str
     password: str
 
-class ShiftCreate(BaseModel):
-    employee_id: int
+class ShiftView(BaseModel):
+    id: int
+    username: str
     store_id: int
-    shift_date: datetime
-    start_time: datetime
-    end_time: datetime
+    shift_date: str
+    start_time: str
+    end_time: str
+
+    class Config:
+        orm_mode = True
+
+class ShiftCreate(BaseModel):
+    username: str
+    store_id: int
+    shift_date: str
+    start_time: str
+    end_time: str
+
+    class Config:
+        orm_mode = True
+
+class ShiftDelete(BaseModel):
+    id: int
+
+    class Config:
+        orm_mode = True
 
 # Initialize database with stores
 def init_db():
@@ -100,7 +120,12 @@ def register_manager(manager: ManagerRegistration, db: Session = Depends(get_db)
     try:
         db.commit()
         db.refresh(db_manager)
-        return {"message": "Manager registered successfully"}
+        return {
+            "message": "Manager registered successfully",
+            "store_id": db_manager.store_id,
+            "manager_id": db_manager.id,
+            "manager_username": db_manager.username
+        }
     except IntegrityError:
         raise HTTPException(status_code=400, detail="Manager registration failed, possibly due to duplicate data")
 
@@ -115,25 +140,40 @@ def register_employee(employee: EmployeeRegistration, db: Session = Depends(get_
     try:
         db.commit()
         db.refresh(db_employee)
-        return {"message": "Employee registered successfully"}
+        return {
+            "message": "Employee registered successfully",
+            "store_id": db_employee.store_id,
+            "employee_id": db_employee.id,
+            "employee_username": db_employee.username
+        }
     except IntegrityError:
         raise HTTPException(status_code=400, detail="Employee registration failed, possibly due to duplicate data")
 
 # Manager Login
 @app.post("/login/manager")
 def login_manager(user: UserLogin, db: Session = Depends(get_db)):
-    db_user = db.query(models.Manager).filter(models.Manager.username == user.username).first()
-    if db_user and pwd_context.verify(user.password, db_user.password):
-        return {"message": "Login successful"}
+    db_manager = db.query(models.Manager).filter(models.Manager.username == user.username).first()
+    if db_manager and pwd_context.verify(user.password, db_manager.password):
+        return {
+            "message": "Login successful",
+            "store_id": db_manager.store_id,
+            "manager_id": db_manager.id,
+            "manager_username": db_manager.username
+        }
     else:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Incorrect username or password")
 
 # Employee Login
 @app.post("/login/employee")
 def login_employee(user: UserLogin, db: Session = Depends(get_db)):
-    db_user = db.query(models.Employee).filter(models.Employee.username == user.username).first()
-    if db_user and pwd_context.verify(user.password, db_user.password):
-        return {"message": "Login successful"}
+    db_employee = db.query(models.Employee).filter(models.Employee.username == user.username).first()
+    if db_employee and pwd_context.verify(user.password, db_employee.password):
+        return {
+            "message": "Login successful",
+            "store_id": db_employee.store_id,
+            "employee_id": db_employee.id,
+            "employee_username": db_employee.username
+        }
     else:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Incorrect username or password")
 
@@ -144,8 +184,9 @@ def get_employees(store_id: int, db: Session = Depends(get_db)):
     return employees
 
 # View Schedule for Manager
-@app.get("/schedule/manager/{manager_id}", response_model=List[ShiftCreate])
+@app.get("/schedule/manager/{manager_id}", response_model=List[ShiftView])
 def get_schedule_manager(manager_id: int, db: Session = Depends(get_db)):
+    manager = db.query(models.Manager).filter(models.Manager.id == manager_id).first()
     shifts = db.query(models.EmployeeShifts).filter(models.EmployeeShifts.store_id == manager_id).all()
     return shifts
 
@@ -158,40 +199,62 @@ def add_shift(shift: ShiftCreate, manager_id: int, db: Session = Depends(get_db)
         raise HTTPException(status_code=404, detail="Manager not found")
 
     # Check if the employee exists and belongs to the same store as the manager
-    employee = db.query(models.Employee).filter(models.Employee.id == shift.employee_id).first()
+    employee = db.query(models.Employee).filter(models.Employee.username == shift.username).first()
     if not employee or employee.store_id != manager.store_id:
         raise HTTPException(status_code=403, detail="Manager is not authorized to add shifts for this employee")
 
-    db_shift = models.EmployeeShifts(**shift.dict())
+    # Create the shift with the employee ID
+    shift_data = {
+        "username": shift.username,
+        "store_id": shift.store_id,
+        "shift_date": shift.shift_date,
+        "start_time": shift.start_time,
+        "end_time": shift.end_time
+    }
+    db_shift = models.EmployeeShifts(**shift_data)
     db.add(db_shift)
     db.commit()
     db.refresh(db_shift)
-    return {"message": "Shift added successfully"}
+    return {
+        "message": "Shift added successfully",
+        "store_id": manager.store_id,
+        "manager_id": manager.id,
+        "manager_username": manager.username
+    }
 
 # Delete Shifts
 @app.delete("/shifts/delete/{shift_id}")
-def delete_shift(shift_id: int, manager_id: int, db: Session = Depends(get_db)):
+def delete_shift(
+    shift_id: int = Path(..., description="The ID of the shift to delete"),
+    manager_id: int = Query(..., description="The ID of the manager making the request"),
+    db: Session = Depends(get_db)
+):
     # Check if the manager exists and retrieve the manager's store_id
     manager = db.query(models.Manager).filter(models.Manager.id == manager_id).first()
     if not manager:
         raise HTTPException(status_code=404, detail="Manager not found")
-
-    # Retrieve the shift and check if it belongs to an employee in the manager's store
-    shift = db.query(models.EmployeeShifts).filter(models.EmployeeShifts.id == shift_id).join(models.Employee).filter(models.Employee.store_id == manager.store_id).first()
+    
+    # Use the shift_id from the path to find the shift
+    shift = db.query(models.EmployeeShifts).filter(models.EmployeeShifts.id == shift_id).first()
     if not shift:
-        raise HTTPException(status_code=404, detail="Shift not found or not authorized to delete this shift")
-
+        raise HTTPException(status_code=404, detail="Shift not found")
+    
     db.delete(shift)
     db.commit()
-    return {"message": "Shift deleted successfully"}
+    return {
+        "message": "Shift deleted successfully",
+        "store_id": manager.store_id,
+        "manager_id": manager.id,
+        "manager_username": manager.username
+    }
 
 # View Schedule for Employee
-@app.get("/schedule/employee/{employee_id}", response_model=List[ShiftCreate])
-def get_schedule_employee(employee_id: int, db: Session = Depends(get_db)):
-    shifts = db.query(models.EmployeeShifts).filter(models.EmployeeShifts.employee_id == employee_id).all()
+@app.get("/schedule/employee/{employee_username}", response_model=List[ShiftView])
+def get_schedule_employee(username: str, db: Session = Depends(get_db)):
+    shifts = db.query(models.EmployeeShifts).filter(models.EmployeeShifts.username == username).all()
     return shifts
 
 # Run the application
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=8008)
+    uvicorn.run(app, host="127.0.0.1", port=8005)

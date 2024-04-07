@@ -1,85 +1,86 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
 import { useLocation } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.js";
-import "./AdminScreen.css";
-import Header from '../Common/HeadersManager'
+import "./DashboardScreen.css";
+import Header from '../Common/HeadersEmployee';
 
 interface Employee {
   id: number;
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   email: string;
   username: string;
   shifts: string[]; // Assuming shifts is an array of strings
 }
 
-const AdminScreen: FunctionComponent = () => {
+const DashboardEmployee: FunctionComponent = () => {
   const location = useLocation();
-  const { state } = location;
-  const [employees, setEmployees] = useState<Employee[]>([
-    {
-      id: 1,
-      firstName: 'John',
-      lastName: 'Doe',
-      email: 'john.doe@example.com',
-      username: 'john.doe',
-      shifts: ['Morning Shift', 'Evening Shift'],
-    },
-    {
-      id: 2,
-      firstName: 'Jane',
-      lastName: 'Doe',
-      email: 'jane.doe@example.com',
-      username: 'jane.doe',
-      shifts: ['Morning Shift', 'Evening Shift'],
-    },
-  ]);
+  const storeId = location.state?.storeId; // Retrieve store ID from route state
+  console.log("Store ID:", storeId);
+  const employeeId = location.state?.employeeId; // Retrieve store ID from route state
+  console.log("Employee ID", employeeId);
+  const [employees, setEmployees] = useState<Employee[]>([]);
 
   useEffect(() => {
-    // Fetch employee information
-    fetch('https://your-api-endpoint/employees')
-      .then(response => response.json())
-      .then(data => setEmployees(data))
-      .catch(error => console.error('Error fetching employees:', error));
-  }, []);
+    if (!storeId) {
+      console.error("Store ID not provided");
+      return;
+    }
+
+    if (!employeeId) {
+      console.error("Employee ID not provided");
+      return;
+    }
+
+    const fetchEmployees = async () => {
+      try {
+        const response = await fetch(`http://localhost:8000/employees/${storeId}`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch employees");
+        }
+        const data = await response.json();
+        setEmployees(data);
+      } catch (error) {
+        console.error('Error fetching employees:', error);
+      }
+    };
+
+    fetchEmployees();
+  }, [storeId]); // Depend on storeId
 
   const handleEditShifts = (username: string) => {
-    // Implement your edit shifts logic here, such as redirecting to a new page with the username
     console.log(`Editing shifts for ${username}`);
+    // Implement shift editing logic here
   };
 
   return (
     <main>
-      <Header/>
+      <Header />
       <div className="container text-center">
         <div className="row">
           <div className="col border rounded mx-1">
             <div className="table-row row border rounded m-1 overflow-y-scroll">
+              <h2>All Employees</h2>
               <table className="table">
                 <thead>
                   <tr>
-                    <th scope="col">Employee #</th>
+                    <th scope="col">Employee Username</th>
                     <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>
                     <th scope="col">Email Address</th>
                     <th scope="col">Add Shifts</th>
-                    <th scope="col">Edit Shifts</th>
                     <th scope="col">Remove Shifts</th>
                   </tr>
                 </thead>
                 <tbody>
                   {employees.map(employee => (
                     <tr key={employee.id}>
-                      <td>{employee.id}</td>
-                      <td>{employee.firstName}</td>
-                      <td>{employee.lastName}</td>
+                      <td>{employee.username}</td>
+                      <td>{employee.first_name}</td>
+                      <td>{employee.last_name}</td>
                       <td>{employee.email}</td>
                       <td>
-                        <a href={`/add-shift?username=${employee.username}`}>Add Shifts</a>
-                      </td>
-                      <td>
-                        <a href={`/edit-shift?username=${employee.username}`}>Edit Shifts</a>
+                        <a href={`/add-shift?username=${employee.username}&storeId=${storeId}&employeeId=${employeeId}`}>Add Shifts</a>
                       </td>
                       <td>
                         <a href={`/del-shift?username=${employee.username}&shifts=${JSON.stringify(employee.shifts)}`}>Remove Shifts</a>
@@ -96,4 +97,4 @@ const AdminScreen: FunctionComponent = () => {
   );
 };
 
-export default AdminScreen;
+export default DashboardEmployee;

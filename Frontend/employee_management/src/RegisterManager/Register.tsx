@@ -46,37 +46,41 @@ const RegisterManager: React.FC = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!validateForm()) return;
-  
-    const userData = {
-      store_id: parseInt(storeID), // Ensure storeID is an integer
-      first_name: firstName,
-      last_name: lastName,
-      username: username.toLowerCase(),
-      email: email.toLowerCase(),
-      password: password,
+
+    const managerData = {
+        store_id: parseInt(storeID), // Ensure storeID is an integer
+        first_name: firstName,
+        last_name: lastName,
+        username: username.toLowerCase(),
+        email: email.toLowerCase(),
+        password: password,
     };
-  
+
     try {
-      const response = await fetch("http://localhost:8000/register/manager", { // Adjusted URL to match your FastAPI endpoint
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      });
-  
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.detail || "Failed to register user");
-      }
-  
-      const responseData = await response.json();
-      console.log("Registration successful:", responseData);
-      navigate("/admin-dashboard");
+        const response = await fetch("http://localhost:8000/register/manager", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(managerData),
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.detail || "Failed to register user");
+        }
+
+        // Assuming the response includes the store ID, or use the store ID from the form data
+        // If the backend does not return the store ID, replace responseData.store_id with managerData.store_id
+        const responseData = await response.json();
+        console.log("Registration successful:", responseData);
+        
+        // Navigate to DashboardManager with the store ID
+        navigate("/login-manager");
     } catch (error: any) {
-      setErrorMessage(error.message || 'Failed to register. Please try again later.');
+        setErrorMessage(error.message || 'Failed to register. Please try again later.');
     }
-  };  
+  };
 
   return (
     <div className="form-container">

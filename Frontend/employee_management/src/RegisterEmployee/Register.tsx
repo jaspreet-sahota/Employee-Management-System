@@ -72,7 +72,7 @@ const RegisterEmployee: React.FC = () => {
   
       const responseData = await response.json();
       console.log("Registration successful:", responseData);
-      navigate("/admin-dashboard");
+      navigate("/login-employee");
     } catch (error: any) {
       setErrorMessage(error.message || 'Failed to register. Please try again later.');
     }

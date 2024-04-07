@@ -28,7 +28,7 @@ const LoginEmployee: React.FC = () => {
 
           const responseData = await response.json();
           console.log("Login successful:", responseData);
-          navigate("/admin-dashboard");
+          navigate("/dashboard-employee", { state: { storeId: responseData.store_id , employeeId: responseData.employee_id} });
       } catch (error: any) {
           setErrorMessage(error.message || 'Failed to login. Please try again later.');
       }

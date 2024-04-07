@@ -1,0 +1,7 @@
+.table-row {
+    height: 250px;
+}
+
+.container.text-center {
+    padding-top: 40px; /* This adds padding of 40 pixels to the top of your container */
+}

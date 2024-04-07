@@ -10,25 +10,27 @@ const LoginManager: React.FC = () => {
     const navigate = useNavigate();
   
     const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
-      e.preventDefault(); // Prevent default form submission behavior
+      e.preventDefault();
       try {
           const userData = { username: username.toLowerCase(), password };
-          const response = await fetch("http://localhost:8000/login/manager", { // Adjusted to match your API endpoint
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(userData),
+          const response = await fetch("http://localhost:8000/login/manager", {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json",
+              },
+              body: JSON.stringify(userData),
           });
 
           if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.detail || "Failed to login");
+              const errorData = await response.json();
+              throw new Error(errorData.detail || "Failed to login");
           }
 
           const responseData = await response.json();
           console.log("Login successful:", responseData);
-          navigate("/admin-dashboard");
+          
+          // Assuming responseData includes the store ID
+          navigate("/dashboard-manager", { state: { storeId: responseData.store_id, managerId: responseData.manager_id } });
       } catch (error: any) {
           setErrorMessage(error.message || 'Failed to login. Please try again later.');
       }

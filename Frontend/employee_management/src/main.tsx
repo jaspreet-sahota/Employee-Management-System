@@ -7,12 +7,11 @@ import LoginEmployee from './LoginEmployee/Login'
 import RegisterEmployee from './RegisterEmployee/Register'
 import LoginManager from './LoginManager/Login'
 import RegisterManager from './RegisterManager/Register'
-import AdminScreen from './AdminScreen/AdminScreen'
-import EmployeeScreen from './EmployeeScreen/EmployeeScreen'
-import ChooseRole from './ChooseRole/ChooseRole'
+import DashboardManager from './DashboardManager/DashboardManager'
+import DashboardEmployee from './DashboardEmployee/DashboardEmployee'
 import AddShifts from './AddShifts/AddShifts'
-import DelShifts from './DelShifts/DelShifts'
-import EditShifts from './EditShifts/EditShifts'
+import ViewShifts from './ViewShiftsEmployee/ViewShifts'
+import ViewStoreSchedule from './ViewStoreSchedule/ViewStoreSchedule'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -23,12 +22,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Route path='/register-employee' element={<RegisterEmployee />} />
         <Route path='/login-manager' element={<LoginManager />} /> 
         <Route path='/register-manager' element={<RegisterManager />} />
-        <Route path='/admin-dashboard' element={<AdminScreen />} />
-        <Route path='/employee-dashboard' element={<EmployeeScreen />} />
-        <Route path='/choose-role' element={<ChooseRole />} />
+        <Route path='/dashboard-manager' element={<DashboardManager />} />
+        <Route path='/dashboard-employee' element={<DashboardEmployee />} />
+        <Route path='/view-store-schedule' element={<ViewStoreSchedule />} />
         <Route path='/add-shift' element={<AddShifts />} />
-        <Route path='/del-shift' element={<DelShifts />} />
-        <Route path='/edit-shift' element={<EditShifts />} />
+        <Route path='/view-shifts' element={<ViewShifts />} />
       </Routes>
     </Router>
   </React.StrictMode>,
