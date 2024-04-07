@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.js";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Header from '../Common/HeadersManager';
 
@@ -20,6 +20,8 @@ const ViewShifts = () => {
   const [username, setUsername] = useState('');
   const [storeId, setStoreId] = useState('');
   const [managerId, setManagerId] = useState('');
+
+  console.log("Initial", username, storeId, managerId);
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);

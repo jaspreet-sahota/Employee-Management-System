@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useEffect } from "react";
+import { FunctionComponent, useState, useEffect } from "react";
 import { useLocation } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./DashboardScreen.css";
@@ -62,7 +62,7 @@ const DashboardEmployee: FunctionComponent = () => {
   };  
 
   const requestShift = async (shiftId : number) => {
-    if (!username) {
+    if (!shiftId) {
       console.error('Username not provided');
       return;
     }

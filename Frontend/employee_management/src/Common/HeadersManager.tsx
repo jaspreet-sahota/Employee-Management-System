@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import './Headers.css';
 
@@ -8,6 +8,7 @@ function Header() {
   const [username, setUsername] = useState('');
   const [storeId, setStoreId] = useState('');
   const [managerId, setManagerId] = useState('');
+  console.log(username);
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useEffect } from "react";
+import { FunctionComponent, useState, useEffect } from "react";
 import { useLocation } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./DashboardScreen.css";
@@ -68,7 +68,7 @@ const DashboardManager: FunctionComponent = () => {
     try {
       const queryParams = new URLSearchParams({ username }).toString();
       const response = await fetch(`http://localhost:8000/schedule/manager/${managerId}`);
-      console.log("Manager ID:", managerId);
+      console.log("Manager ID:", managerId , queryParams);
       if (!response.ok) {
         const errorResponse = await response.text();
         throw new Error(`Could not fetch shifts: ${response.status} - ${errorResponse}`);
