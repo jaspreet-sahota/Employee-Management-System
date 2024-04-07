@@ -66,6 +66,7 @@ const DashboardEmployee: FunctionComponent = () => {
       console.error('Username not provided');
       return;
     }
+    alert('Shift cancellation requested!');
     //IMPLEMENT MESSAGING?
   };
 
