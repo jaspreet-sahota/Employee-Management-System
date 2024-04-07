@@ -4,12 +4,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./DashboardScreen.css";
 import Header from '../Common/HeadersEmployee';
 
-interface Employee {
+interface Shift {
   id: number;
-  first_name: string;
-  last_name: string;
-  email: string;
+  store_id: number;
   username: string;
+  shift_date: string;
+  start_time: string;
+  end_time: string;
   shifts: string[]; // Assuming shifts is an array of strings
 }
 
@@ -19,7 +20,9 @@ const DashboardEmployee: FunctionComponent = () => {
   console.log("Store ID:", storeId);
   const employeeId = location.state?.employeeId; // Retrieve store ID from route state
   console.log("Employee ID", employeeId);
-  const [employees, setEmployees] = useState<Employee[]>([]);
+  const username = location.state?.username; // Retrieve store ID from route state
+  console.log("Username", username);
+  const [shifts, setShifts] = useState<Shift[]>([]);
 
   useEffect(() => {
     if (!storeId) {
@@ -32,66 +35,69 @@ const DashboardEmployee: FunctionComponent = () => {
       return;
     }
 
-    const fetchEmployees = async () => {
-      try {
-        const response = await fetch(`http://localhost:8000/employees/${storeId}`);
-        if (!response.ok) {
-          throw new Error("Failed to fetch employees");
-        }
-        const data = await response.json();
-        setEmployees(data);
-      } catch (error) {
-        console.error('Error fetching employees:', error);
-      }
-    };
+    if (!username) {
+      console.error("Username not provided");
+      return;
+    }
 
-    fetchEmployees();
+    if (username) {
+      fetchShifts(username);
+    }
   }, [storeId]); // Depend on storeId
 
-  const handleEditShifts = (username: string) => {
-    console.log(`Editing shifts for ${username}`);
-    // Implement shift editing logic here
+  const fetchShifts = async (username: string) => {
+    try {
+      const queryParams = new URLSearchParams({ username }).toString();
+      const response = await fetch(`http://localhost:8000/schedule/employee/${username}`);
+      console.log("username:", username);
+      if (!response.ok) {
+        const errorResponse = await response.text();
+        throw new Error(`Could not fetch shifts: ${response.status} - ${errorResponse}`);
+      }
+      const data = await response.json();
+      setShifts(data);
+    } catch (error) {
+      console.error('Error fetching shifts:', error);
+    }
+  };  
+
+  const requestShift = async (shiftId : number) => {
+    if (!username) {
+      console.error('Username not provided');
+      return;
+    }
+    //IMPLEMENT MESSAGING?
   };
 
   return (
     <main>
       <Header />
       <div className="container text-center">
-        <div className="row">
-          <div className="col border rounded mx-1">
-            <div className="table-row row border rounded m-1 overflow-y-scroll">
-              <h2>All Employees</h2>
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Employee Username</th>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Email Address</th>
-                    <th scope="col">Add Shifts</th>
-                    <th scope="col">Remove Shifts</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {employees.map(employee => (
-                    <tr key={employee.id}>
-                      <td>{employee.username}</td>
-                      <td>{employee.first_name}</td>
-                      <td>{employee.last_name}</td>
-                      <td>{employee.email}</td>
-                      <td>
-                        <a href={`/add-shift?username=${employee.username}&storeId=${storeId}&employeeId=${employeeId}`}>Add Shifts</a>
-                      </td>
-                      <td>
-                        <a href={`/del-shift?username=${employee.username}&shifts=${JSON.stringify(employee.shifts)}`}>Remove Shifts</a>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+        <h2>Store Schedule</h2>
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col">Employee Username</th>
+              <th scope="col">Shift Date</th>
+              <th scope="col">Start Time</th>
+              <th scope="col">End Time</th>
+              <th scope="col">Cancel Shift</th>
+            </tr>
+          </thead>
+          <tbody>
+            {shifts.map((shift, index) => {
+              console.log(`Shift at index ${index}:`, shift); // Debugging log
+              return (
+              <tr key={shift.id}>
+                <td>{shift.username}</td>
+                <td>{shift.shift_date}</td>
+                <td>{shift.start_time}</td>
+                <td>{shift.end_time}</td>
+                <td><button onClick={() => requestShift(shift.id)}>Request</button></td>
+              </tr> );
+            })}
+          </tbody>
+        </table>
       </div>
     </main>
   );

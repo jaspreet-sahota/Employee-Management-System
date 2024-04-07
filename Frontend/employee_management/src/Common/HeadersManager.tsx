@@ -45,14 +45,6 @@ function Header() {
         >
           Manager Dashboard
         </NavLink>
-        <NavLink
-          to="/view-store-schedule"
-          state={{ storeId: storeId, managerId: managerId }}
-          className={({ isActive }) => (isActive ? 'active' : '')}
-          end
-        >
-          View Store Schedule
-        </NavLink>
         <NavLink className={({ isActive }) => (isActive ? 'active' : '')} to="/account-settings" end>
           Account Settings
         </NavLink>

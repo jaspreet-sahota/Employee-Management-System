@@ -10,12 +10,12 @@ interface ShiftDelete {
   shift_date: string;
   start_time: string;
   end_time: string;
+  store_id: number;
   shifts: string[]; // Assuming shifts is an array of strings
 }
 
 const ViewShifts = () => {
   const location = useLocation();
-
   const [shifts, setShifts] = useState<ShiftDelete[]>([]);
   const [username, setUsername] = useState('');
   const [storeId, setStoreId] = useState('');
@@ -26,6 +26,8 @@ const ViewShifts = () => {
     const extractedUsername = queryParams.get('username');
     const extractedStoreId = queryParams.get('storeId');
     const extractedManagerId = queryParams.get('managerId');
+
+    console.log('Extracted values:', extractedUsername, extractedStoreId, extractedManagerId);
 
     setUsername(extractedUsername || '');
     setStoreId(extractedStoreId || '');
